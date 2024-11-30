@@ -7,27 +7,73 @@ public class MapCube : MonoBehaviour
 {
     private GameObject turretGO;
     private TurretData turretData;
+    private bool turretUpgraded;
+    private Color originalColor;
 
     public GameObject buildEffect;
 
-    private void OnMouseDown()
+    private void Start()
     {
-        if (EventSystem.current.IsPointerOverGameObject() == true) return;
-        TurretData selectedTD = BuildManager.Instance.selectedTurretData;
-        if (selectedTD == null || selectedTD.turretPrefab == null) return;
-
-        if (turretData != null) return;
-
-        BuildTurret(selectedTD);
+        turretUpgraded = false;
+        originalColor = GetComponent<MeshRenderer>().material.color;
     }
 
-    private void BuildTurret(TurretData _turretData)
+    private void OnMouseDown()
     {
-        if(!BuildManager.Instance.IsEnough(_turretData.cost)) return;
-        BuildManager.Instance.ChangeMoney(-_turretData.cost);
-        turretData = _turretData;
-        turretGO = GameObject.Instantiate(_turretData.turretPrefab, transform.position, Quaternion.identity);
+        if(EventSystem.current.IsPointerOverGameObject() == true) return;
+        if(turretData != null)
+        {
+            BuildManager.Instance.ShowUpgradeUI(this, transform.position, turretUpgraded);
+        }
+        else
+        {
+            BuildTurret();
+        }
+    }
+
+    private void OnMouseEnter()
+    {
+        if(EventSystem.current.IsPointerOverGameObject() == false)
+        {
+            GetComponent<MeshRenderer>().material.color = Color.blue;
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        GetComponent<MeshRenderer>().material.color = originalColor;
+    }
+
+    private void BuildTurret()
+    {
+        TurretData selectedTD = BuildManager.Instance.selectedTurretData;
+        if(selectedTD == null || selectedTD.turretPrefab == null) return;
+        if(!BuildManager.Instance.IsEnough(selectedTD.cost)) return;
+        BuildManager.Instance.ChangeMoney(- selectedTD.cost);
+        turretData = selectedTD;
+        turretGO = GameObject.Instantiate(selectedTD.turretPrefab, transform.position, Quaternion.identity);
         GameObject soilParticle = GameObject.Instantiate(buildEffect, transform.position, Quaternion.identity);
         Destroy(soilParticle, 2);
+    }
+
+    public void OnTurretUpgrade()
+    {
+        if(BuildManager.Instance.IsEnough(turretData.costUpgraded))
+        {
+            Destroy(turretGO);
+            BuildManager.Instance.ChangeMoney(- turretData.costUpgraded);
+            turretGO = GameObject.Instantiate(turretData.turretUpgradedPrefab, transform.position, Quaternion.identity);
+            GameObject soilParticle = GameObject.Instantiate(buildEffect, transform.position, Quaternion.identity);
+            Destroy(soilParticle, 2);
+            turretUpgraded = true;
+        }
+    }
+    
+    public void OnTurretRemove()
+    {
+        Destroy(turretGO);
+        turretData = null;
+        turretGO = null;
+        turretUpgraded = false;
     }
 }

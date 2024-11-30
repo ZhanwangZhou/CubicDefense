@@ -516,7 +516,7 @@ GameObject:
   - component: {fileID: 782938156935091940}
   - component: {fileID: 242606125573191418}
   - component: {fileID: 1744356491925037932}
-  - component: {fileID: -4640408424763947724}
+  - component: {fileID: 868640435982283506}
   m_Layer: 29
   m_Name: TowerMissile2
   m_TagString: Untagged
@@ -610,7 +610,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-4640408424763947724
+--- !u!114 &868640435982283506
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -619,10 +619,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2222686955077922662}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 057c8a826e3d1434fbb667c739b93f85, type: 3}
+  m_Script: {fileID: 11500000, guid: b22a3078325a64841956683a363b60b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemies: []
+  bulletPrefab: {fileID: 9055966937133900486, guid: 8599031b92a034e4da861d5f0bd5893a, type: 3}
+  leftBulletPosition: {fileID: 6450424821731004891}
+  rightBulletPosition: {fileID: 8582187207555442618}
+  attackRate: 2
 --- !u!1 &2765277545078067129
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,7 +735,7 @@ Transform:
   m_GameObject: {fileID: 3717238203522652844}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.4, y: 0, z: 0.587}
+  m_LocalPosition: {x: -0.326, y: 0, z: 0.587}
   m_LocalScale: {x: 1.0101011, y: 1.010101, z: 1.010101}
   m_ConstrainProportionsScale: 0
   m_Children: []

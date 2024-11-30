@@ -13,7 +13,10 @@ public class BuildManager : MonoBehaviour
     public TurretData selectedTurretData;
     
     public TextMeshProUGUI moneyText;
-    private int money = 1000;
+    public UpgradeUI upgradeUI;
+
+    private int money = 150;
+    private MapCube upgradeCube;
 
     private void Awake()
     {
@@ -44,4 +47,25 @@ public class BuildManager : MonoBehaviour
         moneyText.text = "$" + money.ToString();
     }
 
+    public void ShowUpgradeUI(MapCube cube, Vector3 position, bool upgradeDisabled)
+    {
+        upgradeCube = cube;
+        upgradeUI.Show(position, upgradeDisabled);
+    }
+
+    public void HideUpgradeUI()
+    {
+        upgradeUI.Hide();
+    }
+
+    public void OnTurretUpgrade()
+    {
+        upgradeCube?.OnTurretUpgrade();
+        HideUpgradeUI();
+    }
+    public void OnTurretRemove()
+    {
+        upgradeCube?.OnTurretRemove();
+        HideUpgradeUI();
+    }
 }

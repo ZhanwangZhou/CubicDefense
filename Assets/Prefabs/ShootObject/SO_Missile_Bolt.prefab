@@ -140,7 +140,7 @@ TrailRenderer:
     textureScale: {x: 1, y: 1}
     shadowBias: 0
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0.2
   m_MaskInteraction: 0
   m_Autodestruct: 0
   m_Emitting: 1
@@ -173,7 +173,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 400004}
@@ -432,7 +432,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.25
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4953,6 +4953,7 @@ GameObject:
   - component: {fileID: 400004}
   - component: {fileID: 13500000}
   - component: {fileID: 5400000}
+  - component: {fileID: -3265528075636090784}
   m_Layer: 0
   m_Name: SO_Missile_Bolt
   m_TagString: Untagged
@@ -5025,3 +5026,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &-3265528075636090784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89872ca7315a4de45933ca34c506fabb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 75
+  scatterDamage: 25
+  scatterRadius: 75
+  speed: 25
+  SparkPrefab: {fileID: 100000, guid: a9162585e30302147a5d79c58ef48d3e, type: 3}

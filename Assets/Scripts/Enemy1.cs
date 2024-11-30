@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy1 : MonoBehaviour
 {
@@ -10,8 +11,12 @@ public class Enemy1 : MonoBehaviour
     public float speed = 10;
 
     public int healthPoint = 100;
+    
+    public int maxHealthPoint = 100;
 
     public GameObject deathEffect;
+
+    private Slider hpSlider;
 
     private Transform head;
 
@@ -19,6 +24,8 @@ public class Enemy1 : MonoBehaviour
     void Start()
     {
         targetPosition = PathPoints.Instance.GetPathPoint(pointIndex);
+        hpSlider = transform.Find("Canvas/HPSlider").GetComponent<Slider>();
+        hpSlider.value = 1;
         head = transform.Find("Body");
     }
 
@@ -55,6 +62,7 @@ public class Enemy1 : MonoBehaviour
     public void TakeDamage(int damage)
     {
         healthPoint -= damage;
+        hpSlider.value = (float) healthPoint / maxHealthPoint;
         if(healthPoint <= 0)
         {
             Die();

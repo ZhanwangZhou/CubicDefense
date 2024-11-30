@@ -380,6 +380,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies: []
+  bulletPrefab: {fileID: 100004, guid: f2168ca10c430ea46b7088236d3ff81e, type: 3}
+  SparkPrefab: {fileID: 100004, guid: 69d07b92e675a034c80025fe8d67c5d9, type: 3}
+  leftBulletPosition: {fileID: 1725478513659730016}
+  rightBulletPosition: {fileID: 2268957918172492363}
+  attackRate: 0.5
 --- !u!1 &3968641359248275261
 GameObject:
   m_ObjectHideFlags: 0

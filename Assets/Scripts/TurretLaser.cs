@@ -2,15 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret : MonoBehaviour
+public class TurretLaser : MonoBehaviour
 {
     public List<GameObject> enemies = new List<GameObject>();
     public GameObject bulletPrefab;
-    public Transform leftBulletPosition;
-    public Transform rightBulletPosition;
-
-    private bool lastAttack = false;
-    public float attackRate = 0.5f;
+    public Transform BulletPosition;
+    public float attackRate = 1f;
     private float nextAttackTime;
     private Transform head;
 
@@ -46,24 +43,17 @@ public class Turret : MonoBehaviour
         if(enemies == null || enemies.Count == 0) return;
         if(nextAttackTime < Time.time)
         {
-            Transform target = GetTarget();
-            if(target != null && lastAttack)
+            List<GameObject> targets = GetTargets();
+            if(targets != null && targets.Count > 0)
             {
-                GameObject bullet = GameObject.Instantiate(bulletPrefab, leftBulletPosition.position, Quaternion.identity);
-                bullet.GetComponent<Projectile>().SetTarget(target);
+                GameObject bullet = GameObject.Instantiate(bulletPrefab, BulletPosition.position, Quaternion.identity);
+                bullet.GetComponent<Laser>().SetTargets(targets);
                 nextAttackTime = Time.time + attackRate;
-                lastAttack = false;
-            }else if(target != null)
-            {
-                GameObject bullet = GameObject.Instantiate(bulletPrefab, rightBulletPosition.position, Quaternion.identity);
-                bullet.GetComponent<Projectile>().SetTarget(target);
-                nextAttackTime = Time.time + attackRate;
-                lastAttack = true;
             }
         }
     }
 
-    public Transform GetTarget()
+    public List<GameObject> GetTargets()
     {
         List<int> indexList = new List<int>();
         for(int i = 0; i < enemies.Count; ++i)
@@ -77,7 +67,7 @@ public class Turret : MonoBehaviour
         {
             enemies.RemoveAt(indexList[i]);
         }
-        if(enemies != null && enemies.Count > 0) return enemies[0].transform;
+        if(enemies != null && enemies.Count > 0) return enemies;
         return null;
     }
 
