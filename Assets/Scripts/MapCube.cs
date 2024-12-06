@@ -23,7 +23,8 @@ public class MapCube : MonoBehaviour
         if(EventSystem.current.IsPointerOverGameObject() == true) return;
         if(turretData != null)
         {
-            BuildManager.Instance.ShowUpgradeUI(this, transform.position, turretUpgraded);
+            BuildManager.Instance.ShowUpgradeUI(this, transform.position, turretUpgraded,
+            turretData.costUpgraded, turretData.removePrice);
         }
         else
         {
@@ -72,6 +73,7 @@ public class MapCube : MonoBehaviour
     public void OnTurretRemove()
     {
         Destroy(turretGO);
+        BuildManager.Instance.ChangeMoney(+ turretData.removePrice);
         turretData = null;
         turretGO = null;
         turretUpgraded = false;

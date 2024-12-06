@@ -15,7 +15,7 @@ public class Missile : MonoBehaviour
 
     private void Update()
     {
-        if(targets != null && targets.Count > 0)
+        if(targets != null && targets.Count > 0 && targets[0] != null)
         {
             transform.LookAt(targets[0].transform.position);
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
