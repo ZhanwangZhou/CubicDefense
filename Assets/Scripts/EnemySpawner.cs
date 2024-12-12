@@ -6,6 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
     public static EnemySpawner Instance{get; private set;}
     public List<EnemyWave> waveList;
+    public Coroutine spawnCoroutine;
     public Transform startPoint;
     private int enemyCount = 0;
 
@@ -15,16 +16,9 @@ public class EnemySpawner : MonoBehaviour
         Instance = this;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SpawnEnemy());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        spawnCoroutine = StartCoroutine(SpawnEnemy());
     }
 
     IEnumerator SpawnEnemy()
@@ -41,7 +35,13 @@ public class EnemySpawner : MonoBehaviour
                 yield return 0;
             }
         }
+        GameManager.Instance.Success();
         yield return null;
+    }
+
+    public void StopSpawn()
+    {
+        StopCoroutine(spawnCoroutine);
     }
 
     public void DecreaseEnemyCount()

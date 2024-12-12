@@ -47,6 +47,7 @@ public class Enemy1 : MonoBehaviour
         ++pointIndex;
         if(pointIndex > PathPoints.Instance.GetLength() - 1)
         {
+            GameManager.Instance.decreaseLifePoint(1);
             Die();
             return;
         }
@@ -64,6 +65,7 @@ public class Enemy1 : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if(healthPoint <= 0) return;
         healthPoint -= damage;
         hpSlider.value = (float) healthPoint / maxHealthPoint;
         if(healthPoint <= 0)

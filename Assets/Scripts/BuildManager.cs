@@ -11,16 +11,12 @@ public class BuildManager : MonoBehaviour
     public TurretData missileTurretData;
     public TurretData laserTurretData;
     public TurretData selectedTurretData;
-    
     public TextMeshProUGUI moneyText;
     public UpgradeUI upgradeUI;
-
     public TextMeshProUGUI upgradeText;
-
     public TextMeshProUGUI removeText;
 
     private int money = 300;
-
     private Animator moneyTextAnim;
     private MapCube upgradeCube;
 
@@ -46,10 +42,12 @@ public class BuildManager : MonoBehaviour
     {
         selectedTurretData = standardTurretData;
     }
+
     public void OnMissileSelected(bool isOn)
     {
         selectedTurretData = missileTurretData;
     }
+
     public void OnLaserSelected(bool isOn)
     {
         selectedTurretData = laserTurretData;
